@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "directory-blocks/spec-card",
+  "title": "Spec Card",
+  "category": "directory-blocks",
+  "icon": "id-alt",
+  "description": "A card with a fixed heading and a free-form body, so editors can add any blocks inside without breaking the layout.",
+  "keywords": [
+    "card",
+    "panel",
+    "spec",
+    "feature"
+  ],
+  "textdomain": "directory-blocks",
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 3
+    },
+    "showEyebrow": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "gradients": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
+  },
+  "styles": [
+    {
+      "name": "bordered",
+      "label": "Bordered",
+      "isDefault": true
+    },
+    {
+      "name": "plain",
+      "label": "Plain"
+    }
+  ],
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

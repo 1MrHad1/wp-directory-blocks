@@ -1,0 +1,23 @@
+{
+	"name": "wp-directory-blocks",
+	"version": "1.0.0",
+	"description": "Two WordPress blocks: a server-rendered, filterable post directory built on the Interactivity API, and a composable spec card using InnerBlocks.",
+	"author": "Haseeb Ahmed Danish",
+	"license": "GPL-2.0-or-later",
+	"private": true,
+	"scripts": {
+		"build": "wp-scripts build --experimental-modules",
+		"start": "wp-scripts start --experimental-modules",
+		"format": "wp-scripts format",
+		"lint:js": "wp-scripts lint-js",
+		"lint:css": "wp-scripts lint-style",
+		"packages-update": "wp-scripts packages-update",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:clean": "wp-env clean all"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^12.2.0",
+		"@wordpress/scripts": "^37.2.0"
+	}
+}

@@ -1,0 +1,32 @@
+/**
+ * Editor-only affordances for the Directory block.
+ */
+
+.directory-blocks-directory {
+	&__loading {
+		align-items: center;
+		display: flex;
+		gap: 0.5rem;
+		margin: 0;
+	}
+
+	&__note {
+		color: rgba(0, 0, 0, 0.6);
+		font-size: 0.8125rem;
+		font-style: italic;
+		margin-block-start: 1rem;
+	}
+
+	// The filter bar is inert in the editor, so make that obvious rather than
+	// letting an editor click it and conclude the block is broken.
+	&__filters {
+		opacity: 0.65;
+		pointer-events: none;
+	}
+
+	&__filter {
+		&.is-active {
+			background: rgba(0, 0, 0, 0.08);
+		}
+	}
+}

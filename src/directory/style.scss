@@ -1,0 +1,168 @@
+/**
+ * Directory block, shared by the editor and the front end.
+ *
+ * Mobile-first: one column by default, and the configured column count only
+ * applies once there is room for it. A `has-4-columns` class on a phone would
+ * otherwise produce four unreadable slivers.
+ */
+
+.directory-blocks-directory {
+	--db-gap: 1.5rem;
+	--db-radius: 8px;
+	--db-border: 1px solid rgba(0, 0, 0, 0.12);
+	--db-muted: rgba(0, 0, 0, 0.6);
+
+	&__filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-block-end: var(--db-gap);
+	}
+
+	&__filter {
+		background: transparent;
+		border: var(--db-border);
+		border-radius: 999px;
+		cursor: pointer;
+		font: inherit;
+		font-size: 0.875rem;
+		line-height: 1.2;
+		// 44px minimum touch target, which a pill button misses by default.
+		min-height: 44px;
+		padding: 0.5rem 1rem;
+		transition: background-color 120ms ease, border-color 120ms ease;
+
+		&:hover {
+			background: rgba(0, 0, 0, 0.04);
+		}
+
+		// Never remove the focus ring; thicken it instead.
+		&:focus-visible {
+			outline: 2px solid currentColor;
+			outline-offset: 2px;
+		}
+
+		&[aria-pressed="true"] {
+			background: currentColor;
+			border-color: currentColor;
+
+			// Punch the label out of the filled pill without needing to know
+			// the theme's background colour. Canvas is the page background in
+			// both light and dark mode; #fff is the fallback for older engines.
+			color: #fff;
+			color: Canvas;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		gap: var(--db-gap);
+		grid-template-columns: 1fr;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__entry {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin: 0;
+
+		&[hidden] {
+			display: none;
+		}
+	}
+
+	&__image-link {
+		display: block;
+		line-height: 0;
+	}
+
+	&__image {
+		aspect-ratio: 16 / 10;
+		border-radius: var(--db-radius);
+		display: block;
+		height: auto;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	&__title {
+		font-size: 1.125rem;
+		line-height: 1.3;
+		margin: 0;
+
+		a {
+			color: inherit;
+			text-decoration: none;
+
+			&:hover,
+			&:focus-visible {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__terms {
+		color: var(--db-muted);
+		font-size: 0.8125rem;
+		letter-spacing: 0.02em;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	&__excerpt {
+		color: var(--db-muted);
+		font-size: 0.9375rem;
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	@media (min-width: 600px) {
+		&.has-2-columns &__grid,
+		&.has-3-columns &__grid,
+		&.has-4-columns &__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 900px) {
+		&.has-3-columns &__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		&.has-4-columns &__grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	// The "rows" block style: a dense list, image suppressed even if the
+	// toggle is on, because a row layout has nowhere to put it.
+	&.is-style-rows {
+		.directory-blocks-directory__grid {
+			gap: 0;
+		}
+
+		.directory-blocks-directory__entry {
+			border-block-end: var(--db-border);
+			padding-block: 1rem;
+		}
+
+		.directory-blocks-directory__image-link {
+			display: none;
+		}
+
+		@media (min-width: 600px) {
+			.directory-blocks-directory__grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.directory-blocks-directory__filter {
+		transition: none;
+	}
+}

@@ -6,12 +6,7 @@
 	"category": "directory-blocks",
 	"icon": "grid-view",
 	"description": "A server-rendered directory of posts that visitors can filter by taxonomy term without a page reload.",
-	"keywords": [
-		"directory",
-		"filter",
-		"grid",
-		"listing"
-	],
+	"keywords": [ "directory", "filter", "grid", "listing" ],
 	"textdomain": "directory-blocks",
 	"attributes": {
 		"postType": {
@@ -48,10 +43,7 @@
 		}
 	},
 	"supports": {
-		"align": [
-			"wide",
-			"full"
-		],
+		"align": [ "wide", "full" ],
 		"html": false,
 		"interactivity": true,
 		"spacing": {

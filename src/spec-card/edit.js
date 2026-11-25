@@ -23,7 +23,12 @@ import './style.scss';
  * A starting point, not a cage: the template seeds one paragraph, and
  * templateLock is left off so editors can add and reorder freely.
  */
-const TEMPLATE = [ [ 'core/paragraph', { placeholder: __( 'Add details…', 'directory-blocks' ) } ] ];
+const TEMPLATE = [
+	[
+		'core/paragraph',
+		{ placeholder: __( 'Add details…', 'directory-blocks' ) },
+	],
+];
 
 const ALLOWED_BLOCKS = [
 	'core/paragraph',
@@ -98,7 +103,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					tagName={ HeadingTag }
 					className="directory-blocks-spec-card__heading"
 					value={ heading }
-					onChange={ ( value ) => setAttributes( { heading: value } ) }
+					onChange={ ( value ) =>
+						setAttributes( { heading: value } )
+					}
 					placeholder={ __( 'Card heading', 'directory-blocks' ) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				/>

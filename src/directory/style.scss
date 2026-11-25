@@ -11,6 +11,8 @@
 	--db-radius: 8px;
 	--db-border: 1px solid rgba(0, 0, 0, 0.12);
 	--db-muted: rgba(0, 0, 0, 0.6);
+	--db-active-bg: #1e1e1e;
+	--db-active-fg: #fff;
 
 	&__filters {
 		display: flex;
@@ -20,7 +22,7 @@
 	}
 
 	&__filter {
-		background: transparent;
+		background-color: transparent;
 		border: var(--db-border);
 		border-radius: 999px;
 		cursor: pointer;
@@ -33,24 +35,26 @@
 		transition: background-color 120ms ease, border-color 120ms ease;
 
 		&:hover {
-			background: rgba(0, 0, 0, 0.04);
+			background-color: rgba(0, 0, 0, 0.04);
 		}
 
 		// Never remove the focus ring; thicken it instead.
 		&:focus-visible {
-			outline: 2px solid currentColor;
+			outline: 2px solid currentcolor;
 			outline-offset: 2px;
 		}
 
+		// Longhand `background-color`, not the `background` shorthand, because
+		// background-color is the property named in the transition above.
+		// Explicit tokens rather than `background: currentColor` with an
+		// overridden `color`, because currentColor resolves against the
+		// element's own computed colour: setting both paints a white pill with
+		// white text on it. A theme can override these tokens without having to
+		// reason about resolution order.
 		&[aria-pressed="true"] {
-			background: currentColor;
-			border-color: currentColor;
-
-			// Punch the label out of the filled pill without needing to know
-			// the theme's background colour. Canvas is the page background in
-			// both light and dark mode; #fff is the fallback for older engines.
-			color: #fff;
-			color: Canvas;
+			background-color: var(--db-active-bg, #1e1e1e);
+			border-color: var(--db-active-bg, #1e1e1e);
+			color: var(--db-active-fg, #fff);
 		}
 	}
 
@@ -120,6 +124,7 @@
 	}
 
 	@media (min-width: 600px) {
+
 		&.has-2-columns &__grid,
 		&.has-3-columns &__grid,
 		&.has-4-columns &__grid {
@@ -128,6 +133,7 @@
 	}
 
 	@media (min-width: 900px) {
+
 		&.has-3-columns &__grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
@@ -140,6 +146,7 @@
 	// The "rows" block style: a dense list, image suppressed even if the
 	// toggle is on, because a row layout has nowhere to put it.
 	&.is-style-rows {
+
 		.directory-blocks-directory__grid {
 			gap: 0;
 		}
@@ -154,6 +161,7 @@
 		}
 
 		@media (min-width: 600px) {
+
 			.directory-blocks-directory__grid {
 				grid-template-columns: 1fr;
 			}
@@ -162,6 +170,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	.directory-blocks-directory__filter {
 		transition: none;
 	}

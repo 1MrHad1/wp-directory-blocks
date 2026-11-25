@@ -6,7 +6,11 @@
  * trade-off for presentational content an editor has written by hand.
  */
 
-import { useBlockProps, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	useInnerBlocksProps,
+	RichText,
+} from '@wordpress/block-editor';
 
 export default function Save( { attributes } ) {
 	const { heading, eyebrow, showEyebrow, headingLevel } = attributes;

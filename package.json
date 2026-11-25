@@ -17,7 +17,14 @@
 		"env:clean": "wp-env clean all"
 	},
 	"devDependencies": {
+		"@wordpress/block-editor": "^20.1.0",
+		"@wordpress/blocks": "^17.2.0",
+		"@wordpress/components": "^45.0.0",
+		"@wordpress/core-data": "^9.2.0",
+		"@wordpress/data": "^11.2.0",
 		"@wordpress/env": "^12.2.0",
+		"@wordpress/i18n": "^7.2.0",
+		"@wordpress/interactivity": "^8.2.0",
 		"@wordpress/scripts": "^37.2.0"
 	}
 }

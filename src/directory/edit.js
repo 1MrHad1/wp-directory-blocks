@@ -82,12 +82,15 @@ export default function Edit( { attributes, setAttributes } ) {
 		className: `directory-blocks-directory has-${ columns }-columns`,
 	} );
 
-	// If the chosen taxonomy is not attached to the chosen post type, filters
-	// would render as an empty bar. Say so in the editor rather than shipping it.
+	// Filtering can fail in two different ways, and an earlier version of this
+	// only caught the second one. A post type with no public taxonomies at all
+	// (pages, by default) short-circuited the check and warned about nothing.
+	const hasNoTaxonomies = relevantTaxonomies.length === 0;
 	const taxonomyMismatch =
-		showFilters &&
-		relevantTaxonomies.length > 0 &&
+		! hasNoTaxonomies &&
 		! relevantTaxonomies.some( ( tax ) => tax.slug === taxonomy );
+	const filterWarning =
+		showFilters && ( hasNoTaxonomies || taxonomyMismatch );
 
 	return (
 		<>
@@ -174,7 +177,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						__nextHasNoMarginBottom
 					/>
 					<ToggleControl
-						label={ __( 'Show featured image', 'directory-blocks' ) }
+						label={ __(
+							'Show featured image',
+							'directory-blocks'
+						) }
 						checked={ showImage }
 						onChange={ ( value ) =>
 							setAttributes( { showImage: value } )
@@ -193,16 +199,21 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ taxonomyMismatch && (
+				{ filterWarning && (
 					<Notice status="warning" isDismissible={ false }>
-						{ sprintf(
-							/* translators: %s: taxonomy slug. */
-							__(
-								'"%s" is not registered for this post type, so the filter bar will be empty.',
-								'directory-blocks'
-							),
-							taxonomy
-						) }
+						{ hasNoTaxonomies
+							? __(
+									'This post type has no taxonomies registered, so no filters can be shown. Turn off the filter bar, or pick a post type that has categories or tags.',
+									'directory-blocks'
+								)
+							: sprintf(
+									/* translators: %s: taxonomy slug. */
+									__(
+										'"%s" is not registered for this post type, so no filters can be shown.',
+										'directory-blocks'
+									),
+									taxonomy
+								) }
 					</Notice>
 				) }
 
@@ -230,7 +241,10 @@ export default function Edit( { attributes, setAttributes } ) {
 									{ __( 'All', 'directory-blocks' ) }
 								</span>
 								<span className="directory-blocks-directory__filter">
-									{ __( 'Filters render on the front end', 'directory-blocks' ) }
+									{ __(
+										'Filters render on the front end',
+										'directory-blocks'
+									) }
 								</span>
 							</div>
 						) }
@@ -238,8 +252,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						<ul className="directory-blocks-directory__grid">
 							{ entries.map( ( entry ) => {
 								const image =
-									entry._embedded?.[ 'wp:featuredmedia' ]?.[ 0 ]
-										?.source_url;
+									entry._embedded?.[
+										'wp:featuredmedia'
+									]?.[ 0 ]?.source_url;
 
 								return (
 									<li

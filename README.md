@@ -42,7 +42,7 @@ A card with a fixed heading and a free-form InnerBlocks body.
 
 **`post_type_exists()` before querying.** Without it, `WP_Query` falls back to `post` when a post type is deactivated, and the block silently renders the wrong content rather than nothing. That failure is much harder to diagnose than an empty block.
 
-**A mismatched taxonomy is surfaced in the editor.** If the chosen taxonomy is not registered for the chosen post type, the filter bar would render empty on the front end. The editor says so instead of letting it ship.
+**Broken filter configurations are surfaced in the editor.** Filtering can fail two ways: the chosen taxonomy is not registered for the chosen post type, or the post type has no public taxonomies at all. The first version of this check only caught the first case, because the guard required at least one taxonomy to exist before comparing, so selecting Pages (which have none by default) warned about nothing. Both now warn. The front end is independently safe either way, because `render.php` derives filters from terms actually present and simply omits the bar when there are none.
 
 **Minimum 44px touch targets on the filter pills**, which a pill button misses by default at normal font sizes, and focus rings are thickened rather than removed.
 

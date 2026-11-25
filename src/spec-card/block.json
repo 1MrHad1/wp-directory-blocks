@@ -6,12 +6,7 @@
 	"category": "directory-blocks",
 	"icon": "id-alt",
 	"description": "A card with a fixed heading and a free-form body, so editors can add any blocks inside without breaking the layout.",
-	"keywords": [
-		"card",
-		"panel",
-		"spec",
-		"feature"
-	],
+	"keywords": [ "card", "panel", "spec", "feature" ],
 	"textdomain": "directory-blocks",
 	"attributes": {
 		"heading": {
